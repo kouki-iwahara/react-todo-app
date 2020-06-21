@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootSate } from '../../reducers/rootReducer'
-import { addTodo } from '../../modules/todoModule'
+import { addTodoAction, deleteTodoAction } from '../../modules/todoModule'
 import RadioButton from '../components/atoms/Radio/RadioButton'
 import InputText from '../components/atoms/InputText/InputText'
 import Button from '../components/atoms/Button/Button'
@@ -14,9 +14,13 @@ const TodoApp: React.FC = () => {
   const handleChange = (todoContent: string) => {
     setContent(todoContent)
   }
-  const addTodoContent = () => {
-    dispatch(addTodo({ content, status: '作業中' }))
+  const addTodo = () => {
+    dispatch(addTodoAction({ content, status: '作業中' }))
     setContent('')
+  }
+
+  const deleteTodo = (index: number) => {
+    dispatch(deleteTodoAction(index))
   }
   return (
     <div>
@@ -46,10 +50,10 @@ const TodoApp: React.FC = () => {
           value={content}
           onChange={(event) => handleChange(event.target.value)}
         />
-        <Button text="追加" onClick={() => addTodoContent()} />
+        <Button text="追加" disable={!content} onClick={addTodo} />
       </div>
       <div>
-        <Table todos={todos} />
+        <Table todos={todos} deleteTodo={deleteTodo} />
       </div>
     </div>
   )

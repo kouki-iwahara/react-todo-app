@@ -5,16 +5,23 @@ const todoModule = createSlice({
   name: 'todos',
   initialState: [],
   reducers: {
-    addTodo(state: Todo[], action: PayloadAction<Todo>) {
+
+    addTodoAction(state: Todo[], action: PayloadAction<Todo>) {
+
       const todo: Todo = {
         content: action.payload.content,
         status: action.payload.status,
       }
       state.push(todo)
     },
+
+    deleteTodoAction(state: Todo[], action: PayloadAction<number>) {
+      const index = action.payload
+      state.splice(index, 1)
+    },
   },
 })
 
-export const { addTodo } = todoModule.actions
+export const { addTodoAction, deleteTodoAction } = todoModule.actions
 
 export default todoModule

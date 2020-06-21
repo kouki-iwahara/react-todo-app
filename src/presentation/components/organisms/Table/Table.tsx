@@ -4,9 +4,10 @@ import Button from '../../atoms/Button/Button'
 
 type TProps = {
   todos: Todo[]
+  deleteTodo: (index: number) => void
 }
 
-const Table: React.FC<TProps> = ({ todos }) => {
+const Table: React.FC<TProps> = ({ todos, deleteTodo }) => {
   return (
     <table>
       <thead>
@@ -29,7 +30,9 @@ const Table: React.FC<TProps> = ({ todos }) => {
                   onClick={() => console.log('clicked')}
                 />
               </td>
-              <td>削除</td>
+              <td>
+                <Button text="削除" onClick={() => deleteTodo(index)} />
+              </td>
             </tr>
           )
         })}
