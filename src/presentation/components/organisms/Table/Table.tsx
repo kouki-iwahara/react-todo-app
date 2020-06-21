@@ -5,9 +5,10 @@ import Button from '../../atoms/Button/Button'
 type TProps = {
   todos: Todo[]
   deleteTodo: (index: number) => void
+  changeStatus: (index: number) => void
 }
 
-const Table: React.FC<TProps> = ({ todos, deleteTodo }) => {
+const Table: React.FC<TProps> = ({ todos, deleteTodo, changeStatus }) => {
   return (
     <table>
       <thead>
@@ -27,7 +28,7 @@ const Table: React.FC<TProps> = ({ todos, deleteTodo }) => {
               <td>
                 <Button
                   text={todo.status}
-                  onClick={() => console.log('clicked')}
+                  onClick={() => changeStatus(index)}
                 />
               </td>
               <td>

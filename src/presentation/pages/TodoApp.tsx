@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootSate } from '../../reducers/rootReducer'
-import { addTodoAction, deleteTodoAction } from '../../modules/todoModule'
+import {
+  addTodoAction,
+  deleteTodoAction,
+  changeStatusAction,
+} from '../../modules/todoModule'
 import RadioButton from '../components/atoms/Radio/RadioButton'
 import InputText from '../components/atoms/InputText/InputText'
 import Button from '../components/atoms/Button/Button'
@@ -18,9 +22,11 @@ const TodoApp: React.FC = () => {
     dispatch(addTodoAction({ content, status: '作業中' }))
     setContent('')
   }
-
   const deleteTodo = (index: number) => {
     dispatch(deleteTodoAction(index))
+  }
+  const changeStatus = (index: number) => {
+    dispatch(changeStatusAction(index))
   }
   return (
     <div>
@@ -53,7 +59,11 @@ const TodoApp: React.FC = () => {
         <Button text="追加" disable={!content} onClick={addTodo} />
       </div>
       <div>
-        <Table todos={todos} deleteTodo={deleteTodo} />
+        <Table
+          todos={todos}
+          deleteTodo={deleteTodo}
+          changeStatus={changeStatus}
+        />
       </div>
     </div>
   )
